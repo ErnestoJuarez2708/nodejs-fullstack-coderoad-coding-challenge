@@ -19,13 +19,13 @@ jobs:
           node-version: 18
 
       - name: Build Frontend
-        working-directory: frontend
+        working-directory: client
         run: |
           npm install
           npm run build
 
       - name: Install Backend Dependencies
-        working-directory: backend
+        working-directory: server
         run: npm install
 
       - name: Deploy Frontend via SCP
