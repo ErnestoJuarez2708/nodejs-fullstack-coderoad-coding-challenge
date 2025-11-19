@@ -28,23 +28,14 @@ jobs:
         working-directory: server
         run: npm install
 
-      - name: Deploy Frontend via SCP
+      - name: Stage Frontend to EC2
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "frontend/build/*"
+          source: "client/build/"
           target: "/var/www/html"
-
-      - name: Deploy Backend via SCP
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "backend/*"
-          target: "/var/www/api"
 
       - name: Start Backend on EC2
         uses: appleboy/ssh-action@v1
